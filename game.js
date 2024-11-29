@@ -268,3 +268,43 @@ function canMoveInGroup(group) {
     return targetCell.canAccept(cell.linkedTile);
   });
   }
+
+  let startX, startY, endX, endY;
+
+// Detect swipe start
+window.addEventListener("touchstart", (event) => {
+  const touch = event.touches[0];
+  startX = touch.clientX;
+  startY = touch.clientY;
+});
+
+// Detect swipe end and determine direction
+window.addEventListener("touchend", (event) => {
+  const touch = event.changedTouches[0];
+  endX = touch.clientX;
+  endY = touch.clientY;
+
+  handleSwipe();
+});
+
+function handleSwipe() {
+  const deltaX = endX - startX;
+  const deltaY = endY - startY;
+
+  // Check if the swipe is primarily horizontal or vertical
+  if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    // Horizontal swipe
+    if (deltaX > 0) {
+      handleInput({ key: "ArrowRight" }); // Swipe right
+    } else {
+      handleInput({ key: "ArrowLeft" }); // Swipe left
+    }
+  } else {
+    // Vertical swipe
+    if (deltaY > 0) {
+      handleInput({ key: "ArrowDown" }); // Swipe down
+    } else {
+      handleInput({ key: "ArrowUp" }); // Swipe up
+    }
+  }
+}
