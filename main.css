@@ -49,6 +49,15 @@ body {
   animation: show 200ms;
 }
 
+.game-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Prevent scrolling inside the container */
+  touch-action: none; /* Disable touch gestures like scrolling or zooming */
+  position: relative; /* Ensure it remains in place */
+}
+
+
 @keyframes show {
   0% {opacity: 0.5; transform: scale(0);}
 }
