@@ -268,18 +268,29 @@ function canMoveInGroup(group) {
     return targetCell.canAccept(cell.linkedTile);
   });
   }
+let startX, startY, endX, endY;
 
-  let startX, startY, endX, endY;
+// Select the game container
+const gameContainer = document.querySelector(".game-container");
 
 // Detect swipe start
-window.addEventListener("touchstart", (event) => {
+gameContainer.addEventListener("touchstart", (event) => {
   const touch = event.touches[0];
   startX = touch.clientX;
   startY = touch.clientY;
+
+  // Prevent default scrolling
+  event.preventDefault();
 });
 
-// Detect swipe end and determine direction
-window.addEventListener("touchend", (event) => {
+// Detect swipe move (optional, to enhance precision)
+gameContainer.addEventListener("touchmove", (event) => {
+  // Prevent default scrolling while swiping
+  event.preventDefault();
+});
+
+// Detect swipe end
+gameContainer.addEventListener("touchend", (event) => {
   const touch = event.changedTouches[0];
   endX = touch.clientX;
   endY = touch.clientY;
